@@ -41,7 +41,7 @@ Made by **AI영끌맨** | https://www.threads.com/@ai_younggle_man
 
 ## 설치
 
-### 한 줄 설치 (추천)
+### 한 줄 설치 — macOS / Linux (추천)
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/hadamyeedady12-dev/codex-ultimate-hud/main/install.sh | bash
@@ -49,7 +49,7 @@ curl -fsSL https://raw.githubusercontent.com/hadamyeedady12-dev/codex-ultimate-h
 
 > 설치 시 SHA256 체크섬 검증이 자동으로 진행됩니다.
 
-### 직접 설치
+### 직접 설치 (macOS / Linux)
 
 ```bash
 git clone https://github.com/hadamyeedady12-dev/codex-ultimate-hud.git
@@ -61,9 +61,32 @@ echo 'alias cxh="~/.codex/hud/launch.sh"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
+### Windows 설치
+
+#### 한 줄 설치 (PowerShell)
+
+```powershell
+irm https://raw.githubusercontent.com/hadamyeedady12-dev/codex-ultimate-hud/main/install.ps1 | iex
+```
+
+#### 직접 설치 (PowerShell)
+
+```powershell
+git clone https://github.com/hadamyeedady12-dev/codex-ultimate-hud.git
+cd codex-ultimate-hud
+New-Item -ItemType Directory -Path "$env:USERPROFILE\.codex\hud" -Force
+Copy-Item status.ps1, launch.ps1 "$env:USERPROFILE\.codex\hud\"
+Add-Content $PROFILE "`nfunction cxh { & '$env:USERPROFILE\.codex\hud\launch.ps1' @args }"
+. $PROFILE
+```
+
+> **Windows 참고**: Windows에서는 tmux 대신 **터미널 타이틀바**에 HUD가 표시됩니다. Windows Terminal, PowerShell, cmd 모두 지원합니다.
+
 ---
 
 ## 사용법
+
+### macOS / Linux (tmux 상태바)
 
 ```bash
 cxh                        # Codex + HUD 실행
@@ -74,11 +97,28 @@ CXH_FULL_AUTO=1 cxh        # 풀오토 모드 (승인 없이 전부 자동 실�
 
 tmux 하단에 상태바가 나타나고, **5초마다 자동 갱신**됩니다.
 
+### Windows (터미널 타이틀바)
+
+```powershell
+cxh                                # Codex + HUD 실행
+cxh -m gpt-5.3                     # 모델 지정해서 실행
+cxh -q "버그 고쳐줘"                 # 프롬프트와 함께 시작
+$env:CXH_FULL_AUTO=1; cxh          # 풀오토 모드
+```
+
+터미널 타이틀바에 HUD가 표시되며, **5초마다 자동 갱신**됩니다.
+
+```
+codex gpt-5.3-codex-spark xhigh | █████░░░░░ 75K/128K 58% | 90K tok | main | 33m | e21 p5 c3
+```
+
 > **참고**: 기본은 안전 모드입니다. `CXH_FULL_AUTO=1`을 붙이면 `--dangerously-bypass-approvals-and-sandbox`가 활성화됩니다. 말 그대로 "위험하게" 전부 자동 승인이니, 본인 책임 하에 사용하세요!
 
 ---
 
 ## 필요한 것들
+
+### macOS / Linux
 
 | 항목 | 설치 방법 |
 |------|-----------|
@@ -86,6 +126,14 @@ tmux 하단에 상태바가 나타나고, **5초마다 자동 갱신**됩니다.
 | [OpenAI Codex CLI](https://github.com/openai/codex) | `npm install -g @openai/codex` |
 | [tmux](https://github.com/tmux/tmux) | `brew install tmux` |
 | bash 4+ | `brew install bash` (macOS 기본은 3.2라 업그레이드 필요!) |
+
+### Windows
+
+| 항목 | 설치 방법 |
+|------|-----------|
+| **Windows 10/11** | PowerShell 5.1+ (기본 포함) |
+| [OpenAI Codex CLI](https://github.com/openai/codex) | `npm install -g @openai/codex` |
+| [git](https://git-scm.com/) | `winget install Git.Git` |
 
 ---
 
@@ -101,11 +149,14 @@ tmux 하단에 상태바가 나타나고, **5초마다 자동 갱신**됩니다.
 └─────────────────────────────────────────────┘
 ```
 
-| 파일 | 역할 |
-|------|------|
-| `launch.sh` | Codex를 tmux 세션으로 감싸서 HUD와 함께 실행 |
-| `status.sh` | `~/.codex/log/codex-tui.log`를 파싱해서 실시간 지표 생성 |
-| `tmux.conf` | 상태바 색상과 레이아웃 설정 (256색) |
+| 파일 | 역할 | 플랫폼 |
+|------|------|--------|
+| `launch.sh` | Codex를 tmux 세션으로 감싸서 HUD와 함께 실행 | macOS/Linux |
+| `status.sh` | `~/.codex/log/codex-tui.log`를 파싱해서 실시간 지표 생성 | macOS/Linux |
+| `tmux.conf` | 상태바 색상과 레이아웃 설정 (256색) | macOS/Linux |
+| `launch.ps1` | Codex를 터미널 타이틀바 HUD와 함께 실행 | Windows |
+| `status.ps1` | 로그를 파싱해서 실시간 지표 생성 (PowerShell) | Windows |
+| `install.ps1` | Windows 자동 설치 스크립트 | Windows |
 
 **성능 포인트**:
 - 로그 파일 변경 시간(mtime) 기반 캐싱 — 로그가 안 바뀌면 재파싱 안 함
