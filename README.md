@@ -2,9 +2,9 @@
 
 > **OpenAI Codex CLI** 전용 실시간 HUD (Head-Up Display)
 >
-> Claude Code의 기존사용하던 hud를 최대한 가져와밨습니다
+> Claude Code의 기존 사용하던 HUD를 최대한 가져왔습니다
 
-  Made by **AI영끌맨** | https://www.threads.com/@ai_younggle_man
+Made by **AI영끌맨** | https://www.threads.com/@ai_younggle_man
 
 ---
 
