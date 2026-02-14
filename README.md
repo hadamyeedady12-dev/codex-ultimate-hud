@@ -2,7 +2,7 @@
 
 > **OpenAI Codex CLI** 전용 실시간 HUD (Head-Up Display)
 >
-> Claude Code의 [claude-ultimate-hud](https://github.com/anthropics/claude-code)에서 영감받아 제작
+> Claude Code의 기존사용하던 hud를 최대한 가져와밨습니다
 
   Made by **AI영끌맨** | https://www.threads.com/@ai_younggle_man
 
