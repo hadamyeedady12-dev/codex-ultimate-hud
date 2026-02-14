@@ -2,10 +2,10 @@
 set -euo pipefail
 
 # codex-ultimate-hud installer
-# One-liner: curl -fsSL https://raw.githubusercontent.com/AI-ynggul/codex-ultimate-hud/main/install.sh | bash
+# One-liner: curl -fsSL https://raw.githubusercontent.com/hadamyeedady12-dev/codex-ultimate-hud/main/install.sh | bash
 
 HUD_DIR="$HOME/.codex/hud"
-REPO="https://raw.githubusercontent.com/AI-ynggul/codex-ultimate-hud/main"
+REPO="https://raw.githubusercontent.com/hadamyeedady12-dev/codex-ultimate-hud/main"
 
 echo "==> Installing codex-ultimate-hud..."
 

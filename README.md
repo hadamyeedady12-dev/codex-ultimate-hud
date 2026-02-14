@@ -35,13 +35,13 @@ Color-coded context bar:
 ### One-liner
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/AI-ynggul/codex-ultimate-hud/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/hadamyeedady12-dev/codex-ultimate-hud/main/install.sh | bash
 ```
 
 ### Manual
 
 ```bash
-git clone https://github.com/AI-ynggul/codex-ultimate-hud.git
+git clone https://github.com/hadamyeedady12-dev/codex-ultimate-hud.git
 cd codex-ultimate-hud
 mkdir -p ~/.codex/hud
 cp status.sh tmux.conf launch.sh ~/.codex/hud/
