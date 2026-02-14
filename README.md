@@ -4,7 +4,7 @@
 >
 > Claude Code의 [claude-ultimate-hud](https://github.com/anthropics/claude-code)에서 영감받아 제작
 
-Made by **AI영끌맨** | @ai_younggle_man@threads.net
+  Made by **AI영끌맨** | https://www.threads.com/@ai_younggle_man
 
 ---
 
