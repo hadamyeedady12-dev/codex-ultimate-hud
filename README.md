@@ -10,6 +10,8 @@ Made by **AI영끌맨** | [@AI-ynggul](https://github.com/AI-ynggul)
 
 ## Preview
 
+![codex-ultimate-hud](assets/preview.png)
+
 ```
 🤖 gpt-5.3-codex-spark xhigh │ █████░░░░░ 75K/128K 58% │ 90K tok │ main │ 33m │ e21 p5 c3
 ```
