@@ -57,12 +57,15 @@ source ~/.zshrc
 ## Usage
 
 ```bash
-cxh                    # Launch Codex with HUD
-cxh -m gpt-5.3        # Pass any codex args
-cxh -q "fix the bug"  # Start with a prompt
+cxh                        # Launch Codex with HUD
+cxh -m gpt-5.3             # Pass any codex args
+cxh -q "fix the bug"       # Start with a prompt
+CXH_FULL_AUTO=1 cxh        # Full-auto mode (skip all approvals)
 ```
 
 The HUD appears as a tmux status bar at the bottom. It refreshes every 5 seconds by parsing Codex's log file.
+
+> **Note**: By default, Codex runs in safe mode. Set `CXH_FULL_AUTO=1` to enable `--dangerously-bypass-approvals-and-sandbox` (use at your own risk).
 
 ---
 
@@ -71,7 +74,7 @@ The HUD appears as a tmux status bar at the bottom. It refreshes every 5 seconds
 - **macOS** or **Linux**
 - [OpenAI Codex CLI](https://github.com/openai/codex) installed
 - [tmux](https://github.com/tmux/tmux) (`brew install tmux`)
-- bash 4+
+- bash 4+ (`brew install bash` on macOS — default macOS bash is 3.2)
 
 ---
 

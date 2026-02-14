@@ -2,10 +2,23 @@
 set -uo pipefail
 # Codex + HUD: one-command launcher
 # Usage: cxh [codex args...]
+#
+# Set CXH_FULL_AUTO=1 to add --dangerously-bypass-approvals-and-sandbox
 
 CODEX_BIN="${CODEX_BIN:-codex}"
 TMUX_CONF="$HOME/.codex/hud/tmux.conf"
-CODER_SESSION_BASE="codex-hud-$(basename "$PWD")"
+
+# --- Bash version check ---
+if [[ "${BASH_VERSINFO[0]}" -lt 4 ]]; then
+    echo "error: bash 4+ required (current: $BASH_VERSION)" >&2
+    echo "  brew install bash   (macOS ships bash 3.2)" >&2
+    exit 1
+fi
+
+# --- Session name: directory + path hash to avoid collision ---
+DIR_NAME=$(basename "$PWD")
+PATH_HASH=$(printf '%s' "$PWD" | shasum -a 256 | cut -c1-6)
+CODER_SESSION_BASE="codex-hud-${DIR_NAME}-${PATH_HASH}"
 SESSION="${OMX_SESSION:-$CODER_SESSION_BASE}"
 SESSION="${SESSION//[^a-zA-Z0-9._-]/-}"
 SESSION="${SESSION//--/-}"
@@ -17,19 +30,26 @@ if ! command -v "$CODEX_BIN" &>/dev/null; then
     exit 1
 fi
 
+# --- Build codex command ---
+CODEX_ARGS=()
+if [[ "${CXH_FULL_AUTO:-0}" == "1" ]]; then
+    CODEX_ARGS+=("--dangerously-bypass-approvals-and-sandbox")
+fi
+CODEX_ARGS+=("$@")
+
+CODEX_CMD=("$CODEX_BIN" "${CODEX_ARGS[@]}")
+
 if ! command -v tmux &>/dev/null; then
     echo "warning: tmux not found, running codex without HUD" >&2
-    exec "$CODEX_BIN" --dangerously-bypass-approvals-and-sandbox "$@"
+    exec "${CODEX_CMD[@]}"
 fi
 
-# Build a safely shell-escaped command for tmux shell execution
-CODEX_CMD=("$CODEX_BIN" "--dangerously-bypass-approvals-and-sandbox" "$@")
 printf -v CODEX_CMD_STR '%q ' "${CODEX_CMD[@]}"
 CODEX_CMD_STR=${CODEX_CMD_STR% }
 
 # If already inside this tmux session, just run codex
 if [[ -n "${TMUX-}" ]] && tmux display-message -p '#S' 2>/dev/null | grep -qx "$SESSION"; then
-    exec "$CODEX_BIN" --dangerously-bypass-approvals-and-sandbox "$@"
+    exec "${CODEX_CMD[@]}"
 fi
 
 # Reuse existing detached session, or kill stale one
