@@ -12,8 +12,6 @@
 
 ![codex-ultimate-hud](assets/full-preview.png)
 
-![status bar close-up](assets/preview.png)
-
 ```
 🤖 gpt-5.3-codex-spark xhigh │ █████░░░░░ 75K/128K 58% │ 90K tok │ main │ 33m │ e21 p5 c3
 ```
